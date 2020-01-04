@@ -1,0 +1,138 @@
+
+$background-color : #FEFEFE;
+$loginPanel-color : lighten(#131313, 3);
+$loginButtons-color : #659A48;
+
+
+body{
+  background-color: $background-color;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+input[type=text], input[type=password]{
+  width:300px;
+  height:25px;
+  padding-left: 2px;
+  font-size: 14px;
+  margin-top:5px;
+  border-width: 1px;
+}
+
+input[type=text]:focus, input[type=password]:focus{
+  outline:none;
+}
+
+button{
+  outline: none;
+  font-size: 16px;
+  border-width: 0px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.loader {
+  border: 4px solid #f3f3f3; /* Light grey */
+  border-top: 4px solid #1f72a8; /* Blue */
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+.navbar{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  top:0px;
+  left:0px;
+  right:0px;
+  width: 100vw;
+  height:40px;
+  background-color: $loginPanel-color ;
+  button{
+    height:30px;
+    width: 60px;
+    margin:0px 40px 0px 40px;
+    background: none;
+    color: white;
+  }
+}
+
+
+.App{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height:100vh;
+}
+
+#auth-page{
+  background-color: $loginPanel-color;
+  padding:30px 30px 50px 30px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px 0 lighten($color: $loginPanel-color, $amount: 20), 0 3px 10px 0 lighten($color: $loginPanel-color, $amount: 40) ;
+  color:white;
+  .input{
+    margin-bottom: 15px;
+  }
+  h1{
+      text-align: center;
+  }
+  #log-reg-buttons{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-top: 20px;
+      button{
+        width:150px;
+        height:40px;
+        color: white;
+        background-color: $loginButtons-color;
+      }
+      button:hover{
+        background-color: darken($color: $loginButtons-color, $amount: 10);
+      }
+  }
+  #social-log-buttons{
+    margin-top:20px;
+  }
+}
+
+
+
+#dash-page{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .url-box-item{
+    margin-top: 10px;
+  }
+  input[type=text]{
+    border : 1.2px ridge dodgerblue;
+    width: 500px;
+  }
+  #submit-url{
+    font-size: 14px;
+    width:80px;
+    height:30px;
+    color: white;
+    background-color: $loginButtons-color;
+  }
+  #submit-url:hover{
+    background-color: darken($color: $loginButtons-color, $amount: 10);
+  }
+}
+
+
