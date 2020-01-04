@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import axios from "axios";
 import {Redirect} from "react-router-dom";
 import { GoogleLoginButton, FacebookLoginButton } from "react-social-login-buttons";
-import passport from "passport";
+import config from "../config/config"
 
 import Navbar from "./Navbar"
 
@@ -23,7 +23,7 @@ class Auth extends Component{
     }
 
     componentDidMount(){
-        axios.get("http://localhost:5000/api/auth/loginWithSession", {withCredentials: true})
+        axios.get(config.nodeServer+"/api/auth/loginWithSession", {withCredentials: true})
         .then(res=>{
             if(res.data.success === "authenticated")
                 this.setState({authenticated:true})
@@ -53,7 +53,7 @@ class Auth extends Component{
         if(email.valid===false || password.valid===false){
             return this.setState({showErrors : true, loading:false})
         }
-        axios.post("http://localhost:5000/api/auth/register", {email:email.value, password:password.value}, {withCredentials: true})
+        axios.post(config.nodeServer+"/api/auth/register", {email:email.value, password:password.value}, {withCredentials: true})
         .then(res => {
             if(res.data.success)
                 return this.setState({authenticated:true, loading:false})
@@ -74,7 +74,7 @@ class Auth extends Component{
         if(email.valid===false || password.valid===false){
             return this.setState({showErrors : true, loading:false})
         }
-        axios.post("http://localhost:5000/api/auth/login", {email:email.value, password:password.value}, {withCredentials: true})
+        axios.post(config.nodeServer+"/api/auth/login", {email:email.value, password:password.value}, {withCredentials: true})
         .then(res => {
             if(res.data.success)
                 return this.setState({authenticated:true, loading:false})
@@ -185,7 +185,7 @@ const Form = (props) => {
 const SocialLogin = (props) => {
     return (
         <div id="social-log-buttons">
-            <a href="http://localhost:5000/api/auth/google">
+            <a href={config.nodeServer+"/api/auth/google"}>
                 <GoogleLoginButton />
             </a>
             <a href="#">

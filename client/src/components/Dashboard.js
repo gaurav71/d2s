@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
 import {Redirect} from "react-router-dom";
+import config from "../config/config"
 
 class Dashboard extends Component{
 
@@ -18,7 +19,7 @@ class Dashboard extends Component{
     }
 
     componentDidMount(){
-        axios.get("http://localhost:5000/api/dashboard", {withCredentials:true})
+        axios.get(config.nodeServer+"/api/dashboard", {withCredentials:true})
         .then(res=>{
             this.setState({data : res.data})
         })
@@ -32,13 +33,13 @@ class Dashboard extends Component{
     }
 
     handleSubmit(event){
-        axios.post("http://localhost:5000/api/download", {url : this.state.url}, {withCredentials:true})
+        axios.post(config.nodeServer+"/api/download", {url : this.state.url}, {withCredentials:true})
         .then(res=>{console.log(res)})
         .catch(err=>{console.dir(err)})
     }
 
     handleLogout(event){
-        axios.get("http://localhost:5000/api/auth/logout", {withCredentials: true})
+        axios.get(config.nodeServer+"/api/auth/logout", {withCredentials: true})
         .then(res=>{
             if(res.data.success){
                 this.setState({authenticated : false})
