@@ -6,12 +6,7 @@ const config        = require("../config/config");
 
 //ROUTE : "/api/dashboard/"
 router.get("/", checkAuth, (req,res) => {
-    MongoClient.connect(config.db, (err, client) => {
-        const db = client.db(config.dbName);
-        db.collection("users").findOne({_id:new ObjectId(req.session.userId)}, (err, doc) => {
-            res.json(doc);
-        })
-    })
+    res.json({"success" : "dashboard"})
 })
 
 module.exports = router;

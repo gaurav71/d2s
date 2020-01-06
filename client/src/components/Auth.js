@@ -22,19 +22,17 @@ class Auth extends Component{
         this.handleChange   = this.handleChange.bind(this);
     }
 
-    componentDidMount(){
-        axios.get(config.nodeServer+"/api/auth/loginWithSession", {withCredentials: true})
-        .then(res=>{
-            if(res.data.success === "authenticated")
-                this.setState({authenticated:true})
-        })
+    async componentDidMount(){
+        const res = await axios.get(config.nodeServer+"/api/auth/loginWithSession", {withCredentials: true});
+        if(res.data.success === "authenticated")
+            this.setState({authenticated:true});
     }
 
     handleChange(event){
         const {name, value} = event.target;
         const valid = this.getValidation(name, value);
         var style = this.validStyle;
-        if(value!="" && valid === false){
+        if(value!=="" && valid === false){
             style = this.notValidStyle;
         }
         this.setState({
@@ -46,44 +44,47 @@ class Auth extends Component{
 
 
 
-    handleRegister(event){
+    async handleRegister(event){
         event.preventDefault();
         this.setState({loading : true, showErrors:false});
         const {email, password} = this.state;
         if(email.valid===false || password.valid===false){
             return this.setState({showErrors : true, loading:false})
         }
-        axios.post(config.nodeServer+"/api/auth/register", {email:email.value, password:password.value}, {withCredentials: true})
-        .then(res => {
+        try{
+            const res =  await axios.post(config.nodeServer+"/api/auth/register", 
+            {email:email.value, password:password.value}, {withCredentials: true});
             if(res.data.success)
                 return this.setState({authenticated:true, loading:false})
             if(res.data.error)
                 return this.setState({showErrors:true, errors:"Email Registered already", loading:false})
-        })
-        .catch(err => {
+
+        }
+        catch(err){
             return this.setState({showErrors:true, errors:"server error", loading:false})
-        })
+        }
+        
     }
     
     
-    handleLogin(event){
+    async handleLogin(event){
         event.preventDefault();
         this.setState({loading : true, showErrors:false});
-        
         const {email, password} = this.state;
         if(email.valid===false || password.valid===false){
             return this.setState({showErrors : true, loading:false})
         }
-        axios.post(config.nodeServer+"/api/auth/login", {email:email.value, password:password.value}, {withCredentials: true})
-        .then(res => {
+        try{
+            const res =  await axios.post(config.nodeServer+"/api/auth/login", 
+            {email:email.value, password:password.value}, {withCredentials: true});
             if(res.data.success)
                 return this.setState({authenticated:true, loading:false})
             if(res.data.error)
-                return this.setState({showErrors:true, errors: res.data.error, loading:false})
-        })
-        .catch(err => {
+                return this.setState({showErrors:true, errors:res.data.error, loading:false})
+        }
+        catch(error){
             return this.setState({showErrors:true, errors:"server error", loading:false})
-        })
+        }
     }
 
     getValidation(name, value){
