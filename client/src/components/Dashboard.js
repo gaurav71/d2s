@@ -51,7 +51,7 @@ class Dashboard extends Component{
                         {url : this.state.url}, {withCredentials:true});
             this.setState({file : {
                 name : res.data.name,
-                size : res.data.size
+                size : res.data.size?res.data.size:"N/A"
             }})
             this.setState({downloadStatus : "loaded"});
         }
