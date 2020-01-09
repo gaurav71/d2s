@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import axios from "axios";
 import {Redirect} from "react-router-dom";
 import { GoogleLoginButton, FacebookLoginButton } from "react-social-login-buttons";
-import config from "../config/config"
 
 import Navbar from "./Navbar"
 
@@ -23,7 +22,7 @@ class Auth extends Component{
     }
 
     async componentDidMount(){
-        const res = await axios.get(config.nodeServer+"/api/auth/loginWithSession", {withCredentials: true});
+        const res = await axios.get("/api/auth/loginWithSession", {withCredentials: true});
         if(res.data.success === "authenticated")
             this.setState({authenticated:true});
     }
@@ -52,7 +51,7 @@ class Auth extends Component{
             return this.setState({showErrors : true, loading:false})
         }
         try{
-            const res =  await axios.post(config.nodeServer+"/api/auth/register", 
+            const res =  await axios.post("/api/auth/register", 
             {email:email.value, password:password.value}, {withCredentials: true});
             if(res.data.success)
                 return this.setState({authenticated:true, loading:false})
@@ -75,7 +74,7 @@ class Auth extends Component{
             return this.setState({showErrors : true, loading:false})
         }
         try{
-            const res =  await axios.post(config.nodeServer+"/api/auth/login", 
+            const res =  await axios.post("/api/auth/login", 
             {email:email.value, password:password.value}, {withCredentials: true});
             if(res.data.success)
                 return this.setState({authenticated:true, loading:false})
@@ -114,6 +113,7 @@ class Auth extends Component{
         }
         
         return (
+            <div style={{width:"100%",height:"100%", display:"flex", alignItems:"center", justifyContent:"center"}}>
             <div id="auth-page">
                 <Navbar authenticated={false}/>
                 
@@ -133,6 +133,7 @@ class Auth extends Component{
                     handleRegister  = {this.handleRegister}/>
 
                 <SocialLogin/>
+            </div>
             </div>
         )
     }
@@ -186,7 +187,7 @@ const Form = (props) => {
 const SocialLogin = (props) => {
     return (
         <div id="social-log-buttons">
-            <a href={config.nodeServer+"/api/auth/google"}>
+            <a href="/api/auth/google">
                 <GoogleLoginButton />
             </a>
             <a href="#">

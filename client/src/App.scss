@@ -1,12 +1,22 @@
 
-$background-color : #FEFEFE;
-$loginPanel-color : lighten(#131313, 3);
+$background-color   : #FEFEFE;
+$loginPanel-color   : lighten(#131313, 3);
 $loginButtons-color : #659A48;
 
-
-body{
-  background-color: $background-color;
+.flexColumn{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+
+.flexRow{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 
 a:link {
   text-decoration: none;
@@ -49,17 +59,15 @@ button{
 
 
 .navbar{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  @extend .flexRow;
   justify-content: space-between;
   position: absolute;
   top:0px;
   left:0px;
-  right:0px;
+  right: 0px;
   width: 100vw;
   height:40px;
-  background-color: $loginPanel-color ;
+  background-color: $loginPanel-color;
   button{
     height:30px;
     width: 60px;
@@ -70,19 +78,60 @@ button{
 }
 
 
+
 .App{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height:100vh;
 }
+
+
+
+#portfolio-page{
+  margin-top : 40px;
+  width:100vw;
+  height: 100vh;
+  background-image: url("./res/images/background.jpg") ; 
+  background-repeat: no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  .portfolio-box{
+    @extend .flexColumn;
+    width: 100%;
+    margin-bottom : 20px;
+    padding : 20px 0px 20px 0px;
+  }
+  #desc{
+    font-size: 32px;
+    height: 200px;
+  }
+  #tech{
+    display: grid;
+    grid-column-gap: 80px;
+    grid-row-gap: 20px;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    #icons{ @extend .flexColumn; }
+  }
+  #projects{
+    display: grid;
+    grid-column-gap: 80px;
+    grid-row-gap: 20px;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    #icons{ @extend .flexColumn; }
+  }
+
+}
+
+
 
 #auth-page{
   background-color: $loginPanel-color;
   padding:30px 30px 50px 30px;
   border-radius: 4px;
-  box-shadow: 0 2px 4px 0 lighten($color: $loginPanel-color, $amount: 20), 0 3px 10px 0 lighten($color: $loginPanel-color, $amount: 40) ;
+  box-shadow: 0 2px 4px  0 lighten($loginPanel-color, 20), 
+              0 3px 10px 0 lighten($loginPanel-color, 40);
   color:white;
   .input{
     margin-bottom: 15px;
@@ -112,58 +161,101 @@ button{
 
 
 
-#dash-page{
-  display: flex;
-  flex-direction: column;
-  height : 80%;
-  #url-box{
-    margin-top:40px;
-  }
-  #download-details{
-    margin-top:40px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    font-size: 22px;
-    .loader{
-      border: 20px solid #f3f3f3; /* Light grey */
-      border-top: 20px solid #1f72a8; /* Blue */
-    }
-    .box{
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      margin-right : 10px;
-      position: relative;
-      right : 50px;
-    }
-    #right-box{
-      align-items: flex-start;
-    }
-    .box-item{
-      margin-top:15px;
-    }
+#dash-page {
+  @extend .flexColumn;
+
+  .dash-child { 
+    margin-top: 40px;
   }
 
-  .url-box-item{
-    margin-right: 10px;
-  }
-  input[type=text]{
-    border : 1.2px ridge dodgerblue;
-    width: 500px;
-  }
-  #submit-url{
+  .dash-button {
     font-size: 14px;
     width:80px;
     height:30px;
     color: white;
     background-color: $loginButtons-color;
-    position: relative;
-    top:2.5px;
   }
-  #submit-url:hover{
+
+  .dash-button:hover{
     background-color: darken($color: $loginButtons-color, $amount: 10);
   }
+
+  .loader{
+    border: 20px solid #f3f3f3; /* Light grey */
+    border-top: 20px solid #1f72a8; /* Blue */
+    margin-top: 40px;
+  }
+
+  #url-box{
+    @extend .flexRow;
+    margin-top : 100px;
+    .dash-button{
+      position: relative;
+      top:2.5px;
+    }
+    .url-box-item{
+      margin-right: 10px;
+    }
+    input[type=text]{
+      border : 1.2px ridge dodgerblue;
+      width: 500px;
+    }
+  }
+
+
+  #download-status{
+    @extend .flexColumn;
+    #download-details{
+      @extend .flexRow;
+      align-items: flex-start;
+      font-size: 22px;
+      .box{
+        @extend .flexColumn;
+        margin-right : 10px;
+      }
+      #left-box{
+        align-items : flex-end; 
+      }
+      #right-box{
+        align-items : flex-start;
+      }
+      .box-item{
+        margin-top  : 15px;
+      }
+      
+    }
+
+    #bar{
+      margin-top: 40px;
+      .loader{
+        margin-top:0px;
+        border: 5px solid #f3f3f3; /* Light grey */
+        border-top: 5px solid #1f72a8; /* Blue */
+      }
+    }
+  
+    
+
+  }
+  
+
+
 }
 
-
+#progress {
+  width: 500px;   
+  border: 1px solid black;
+  position: relative;
+  padding: 3px;
+ }
+ 
+ #percent {
+  position: absolute;   
+  left: 50%;
+ }
+ 
+ #progress-bar {
+  height: 20px;
+  background-color: green;
+  width:0%
+ }

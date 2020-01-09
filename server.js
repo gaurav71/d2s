@@ -13,7 +13,7 @@ const session       = require("./middleware/session");
 
 const app = express();
 
-const whitelist = [config.reactServer]
+const whitelist = ["http://localhost"];
 
 const corsOptions = {
     origin: (origin, callback) => {
@@ -33,6 +33,8 @@ app.use(session);
 app.use(passport.initialize());
 
 
+
+
 const {
     PORT = 5000
 } = process.env;
@@ -49,8 +51,11 @@ io.use(sharedsession(session, {
 })); 
 
 
+
 io.on("connection", (socket) => {
-    socket.on("join", (val) => {
+  console.log("socket handshake");
+    socket.on("join", () => {
+      console.log("joined", socket.handshake.session.userId)
       socket.join(socket.handshake.session.userId);
     })
 })

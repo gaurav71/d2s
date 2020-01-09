@@ -2,56 +2,42 @@ const request   = require("request");
 const fs        = require("fs");
 const mime      = require('mime-types');
 
-module.exports = (url, fileName, filePath, userId, io) => {
+module.exports = (url, fileDetails, userId, io) => {
 
     return new Promise((resolve, reject) => {
-        
-        const file          = fs.createWriteStream(filePath);
-        let mimeType        = "";
-        let fileExtension   = "";
-        let totalSizeBytes  = 0; 
+        console.log(fileDetails);
+        const file          = fs.createWriteStream(fileDetails.path);
         let recievedBytes   = 0;
 
         request.get(url)
             .on("response", (response) => {
-            
                 if(response.statusCode != 200){
                     reject("not found");
                 }
-                mimeType        = response.headers["content-type"];
-                totalSizeBytes  = response.headers["content-length"];
-                fileExtension   = mime.extension(mimeType);  
             })
-        
-
+    
             .on("data", (chunk) => {
                 recievedBytes += chunk.length;
-                io.sockets.in(userId).emit("downloading", {fileName, totalSizeBytes , recievedBytes})
+                io.in(userId).emit("downloading", recievedBytes);
             })
 
             .pipe(file)
             
             .on("error", (err) => {
-                fs.unlink(filePath);
+                fs.unlink(fileDetails.path, ()=>{});
                 reject(err);
             });
         
         
-
             file.on("finish", () => {
                 file.close();
-                resolve({
-                    name : fileName+"."+fileExtension,
-                    extension : fileExtension,
-                    size : totalSizeBytes,
-                    mimeType
-                })
+                resolve();
             })
 
         
             file.on("error", (err) => {
-            fs.unlink(filePath);
-            reject(err);
+                fs.unlink(fileDetails.path, ()=>{});
+                reject(err);
             })
 
             
