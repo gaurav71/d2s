@@ -107,7 +107,7 @@ class Auth extends Component{
                     handleChange    = {this.handleChange}
                     handleLogin     = {this.handleLogin}
                     handleRegister  = {this.handleRegister}/>
-
+                <SocialLogin />
             </div>
             </div>
         )
@@ -154,9 +154,10 @@ const Form = (props) => {
             <div id="log-reg-buttons">
                 <button type="submit" onClick={props.handleLogin}>Login</button>
                 <div id="or">{"-- OR --"}</div>        
-                <SocialLogin />
+                
             </div>
         </form>
+        
     )
 }
 
@@ -165,6 +166,7 @@ const SocialLogin = (props) => {
         <div id="social-log-buttons">
             <a href="/api/auth/google">
                 <GoogleLoginButton 
+                    onClick = {(e)=>{e.preventDefault()}}
                     iconSize="22px" 
                     style={{fontSize:"16px", display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"center"}} 
                     size="40px" align="center"/>
