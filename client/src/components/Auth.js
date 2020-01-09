@@ -177,4 +177,3 @@ const SocialLogin = (props) => {
 
 
 export default Auth;
-
