@@ -241,7 +241,12 @@ button{
 
 @media only screen and (max-width: 600px) {
 	#auth-page{
+		height: 100vh;
 		width: 80%;
+	}
+
+	#url-box input[type=text]{
+		width:80%
 	}
 }
 
