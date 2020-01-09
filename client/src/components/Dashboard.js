@@ -14,7 +14,7 @@ class Dashboard extends Component{
             authenticated : false,
             loading : true,
             downloadStatus : "idle",        // [idle || loading || loaded || downloading || uploading || finished || error] // 
-            file : {name:"", size:null, recieved:null, percent:null}
+            file : {name:"", size:"N/A", recieved:"N/A", percent:null}
         }
         this.handleChange   = this.handleChange.bind(this);
         this.handleSubmit   = this.handleSubmit.bind(this);
