@@ -266,7 +266,7 @@ const getLoader = () => {
 
 
 function humanFileSize(bytes) {
-    if(!bytes || bytes==null) return ""; 
+    if(!bytes || bytes==null) return "N/A"; 
     var thresh = 1000;
     if(Math.abs(bytes) < thresh) {
         return bytes + ' B';
