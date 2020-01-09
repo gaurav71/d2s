@@ -23,7 +23,7 @@ class Dashboard extends Component{
     }
 
 
-    /*
+    
     async componentDidMount(){
         try{
             await axios.get("/api/dashboard", {withCredentials:true});
@@ -33,7 +33,7 @@ class Dashboard extends Component{
             this.setState({authenticated : false, loading:false});
         }
     }
-*/
+
 
 
     handleChange(event){
