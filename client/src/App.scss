@@ -222,6 +222,16 @@ button{
 			width:0%
 		}
 
+		#start-download{
+		  	color : white;
+		  	background-color : $loginButtons-color;
+		  	padding:8px;
+	  	}
+	  
+	  	#start-download:hover{
+		  	background-color: darken($loginButtons-color, 10);
+	  	}
+
 	}
 	 
 }
