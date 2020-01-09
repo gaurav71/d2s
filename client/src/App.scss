@@ -88,13 +88,13 @@ button{
 
 #auth-page{
   background-color: $loginPanel-color;
-  padding:30px 30px 50px 30px;
+  padding:30px 30px 30px 30px;
   border-radius: 4px;
   box-shadow: 0 2px 4px  0 lighten($loginPanel-color, 20), 
               0 3px 10px 0 lighten($loginPanel-color, 40);
   color:white;
   .input{
-    margin: 10px 5px 10px 5px;
+    margin: 10px 5px 20px 5px;
   }
   h1{
       text-align: center;
@@ -112,7 +112,7 @@ button{
       }
   }
   #social-log-buttons{
-    margin-top:15px;
+    margin-top:8px;
   }
 }
 

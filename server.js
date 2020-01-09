@@ -13,10 +13,11 @@ const session       = require("./middleware/session");
 
 const app = express();
 
-const whitelist = ["http://localhost"];
+const whitelist = ["https://www.gauravkalyan.com"];
 
 const corsOptions = {
     origin: (origin, callback) => {
+      console.log(origin);
       if (!origin || whitelist.indexOf(origin) !== -1)
         callback(null, true)
       else 
@@ -53,9 +54,7 @@ io.use(sharedsession(session, {
 
 
 io.on("connection", (socket) => {
-  console.log("socket handshake");
     socket.on("join", () => {
-      console.log("joined", socket.handshake.session.userId)
       socket.join(socket.handshake.session.userId);
     })
 })
