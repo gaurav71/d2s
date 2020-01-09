@@ -109,10 +109,6 @@ class Dashboard extends Component{
 
     render(){
 
-        if(this.state.authenticated === false){
-            return <Redirect to ="/"/>    
-        }
-
         if(this.state.loading){
             return( 
             <div style={{
@@ -124,6 +120,12 @@ class Dashboard extends Component{
                 {getLoader()}
             </div>)
         }
+
+        if(this.state.authenticated === false){
+            return <Redirect to ="/"/>    
+        }
+
+        
 
         return(
             <div id="dash-page">
