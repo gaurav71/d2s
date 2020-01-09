@@ -4,215 +4,226 @@ $loginPanel-color   : lighten(#131313, 3);
 $loginButtons-color : #659A48;
 
 .flexColumn{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  	display: flex;
+  	flex-direction: column;
+	align-items: center;
+  	justify-content: center;
 }
 
 .flexRow{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  	display: flex;
+  	flex-direction: row;
+  	align-items: center;
+  	justify-content: center;
 }
 
 
 a:link {
-  text-decoration: none;
+  	text-decoration: none;
 }
 
 input[type=text], input[type=password]{
-  width:300px;
-  height:25px;
-  padding-left: 2px;
-  font-size: 14px;
-  margin-top:5px;
-  border-width: 1px;
+	padding-left: 2px;
+	font-size: 14px;
+	margin-top:5px;
+	border-width: 1px;
 }
-
+  
 input[type=text]:focus, input[type=password]:focus{
-  outline:none;
+	outline:none;
+}
+  
+button{
+	outline: none;
+	font-size: 16px;
+	border-width: 0px;
+	border-radius: 3px;
+	cursor: pointer;
 }
 
-button{
-  outline: none;
-  font-size: 16px;
-  border-width: 0px;
-  border-radius: 3px;
-  cursor: pointer;
-}
+
 
 .loader {
-  border: 4px solid #f3f3f3; /* Light grey */
-  border-top: 4px solid #1f72a8; /* Blue */
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  animation: spin 2s linear infinite;
+	border: 4px solid #f3f3f3; /* Light grey */
+	border-top: 4px solid #1f72a8; /* Blue */
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	animation: spin 2s linear infinite;
 }
-
+  
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+  
+  
+
+
+.App{
+	  height:100vh;
+	  font-size: 16px;
 }
 
 
 .navbar{
-  @extend .flexRow;
-  justify-content: space-between;
-  position: absolute;
-  top:0px;
-  left:0px;
-  right: 0px;
-  width: 100vw;
-  height:40px;
-  background-color: $loginPanel-color;
-  button{
-    height:30px;
-    width: 60px;
-    margin:0px 40px 0px 40px;
-    background: none;
-    color: white;
-  }
+  	@extend .flexRow;
+  	justify-content: space-between;
+  	position: absolute;
+  	top: 0px;
+  	left: 0px;
+  	right: 0px;
+  	width: 100vw;
+  	height: 5%;
+	background-color: $loginPanel-color;
+	  
+  	button{
+    	height: 80%;
+    	margin: 0px 40px 0px 40px;
+    	background: none;
+    	color: white;
+	}
+	  
 }
-
-
-
-.App{
-  height:100vh;
-}
-
-
 
 
 #auth-page{
-  background-color: $loginPanel-color;
-  padding:30px 30px 30px 30px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px  0 lighten($loginPanel-color, 20), 
-              0 3px 10px 0 lighten($loginPanel-color, 40);
-  color:white;
-  .input{
-    margin: 10px 5px 20px 5px;
-  }
-  h1{
-      text-align: center;
-  }
-  #log-reg-buttons{
-      margin: 20px 5px 0px 5px;
-      button{
-        width: 100%;
-        height:40px;
-        color: white;
-        background-color: $loginButtons-color;
-      }
-      button:hover{
-        background-color: darken($color: $loginButtons-color, $amount: 10);
-      }
-  }
-  #social-log-buttons{
-    margin-top:8px;
-  }
+	background-color: $loginPanel-color;
+	padding: 30px 30px 30px 30px;
+	border-radius: 4px;
+	box-shadow: 0 2px 4px 0 lighten($loginPanel-color, 20), 0 3px 10px 0 lighten($loginPanel-color, 40);
+	color:white;
+	width : 20%;
+
+	#title{
+		@extend .flexColumn;
+	}
+
+	#login-box{
+		@extend .flexColumn;
+
+		.input{
+			width: 100%;
+			margin-bottom : 12px;
+		}
+
+		.center{
+			@extend .flexColumn;
+		}
+
+		input[type=text], input[type=password]{
+			width:96%;
+			height: 25px;
+		}
+
+		#log-reg-buttons{
+			@extend .flexColumn;
+			width : 100%;
+			margin-top : 10px;
+		}
+
+		button{
+			color: white;
+			width: 97%;
+			height: 40px; 
+			background-color: $loginButtons-color;
+		}
+
+		button:hover{
+			background-color: darken($loginButtons-color, 10);
+		}
+
+		#or{
+			margin:4px 0px 1px 0px;
+			font-size : 12px;
+		}
+
+		#social-log-buttons{
+			width : 100%;
+			margin-bottom: 20px;
+		}
+
+	}
+
 }
+
 
 
 
 #dash-page {
-  @extend .flexColumn;
+	@extend .flexColumn;
+	  
+  	.dash-child { 
+    	margin-top: 30px;
+	}
+	  
+	#url-box{
+		@extend .flexRow;
+		width:100%;
+		margin-top : 100px;
 
-  .dash-child { 
-    margin-top: 40px;
-  }
+		input[type=text]{
+			border: 1.2px ridge dodgerblue;
+		  	width: 40%;
+		  	height: 25px;;  
+		}
+		  
+		#submit-url{
+		  	position : relative;
+			top : 2.5px;
+			margin-left : 20px;
+			color : white;
+			background-color : $loginButtons-color;
+			padding:8px;
+		}
+		
+		#submit-url:hover{
+			background-color: darken($loginButtons-color, 10);
+		}
+	}
 
-  .dash-button {
-    font-size: 14px;
-    width:80px;
-    height:30px;
-    color: white;
-    background-color: $loginButtons-color;
-  }
+	#download-status{
+		@extend .flexColumn;
+		
+		#download-details{
+		  	@extend .flexRow;
+		  	align-items: flex-start;
+		  	font-size: 22px;
+		  	.box{
+				@extend .flexColumn;
+				margin-right : 10px;
+		  	}
+		  	#left-box{
+				align-items : flex-end; 
+		  	}
+		  	#right-box{
+				align-items : flex-start;
+		  	}
+		  	.box-item{
+				margin-top  : 15px;
+		  	}
+		}
 
-  .dash-button:hover{
-    background-color: darken($color: $loginButtons-color, $amount: 10);
-  }
+		#progress {
+			width: 40vw;   
+			border: 1px solid black;
+			position: relative;
+			padding: 3px;
+		}
+		   
+		#percent {
+			position: absolute;   
+			left: 50%;
+		}
+		   
+		#progress-bar {
+			height: 20px;
+			background-color: green;
+			width:0%
+		}
 
-  .loader{
-    border: 20px solid #f3f3f3; /* Light grey */
-    border-top: 20px solid #1f72a8; /* Blue */
-    margin-top: 40px;
-  }
-
-  #url-box{
-    @extend .flexRow;
-    margin-top : 100px;
-    .dash-button{
-      position: relative;
-      top:2.5px;
-    }
-    .url-box-item{
-      margin-right: 10px;
-    }
-    input[type=text]{
-      border : 1.2px ridge dodgerblue;
-      width: 500px;
-    }
-  }
-
-
-  #download-status{
-    @extend .flexColumn;
-    #download-details{
-      @extend .flexRow;
-      align-items: flex-start;
-      font-size: 22px;
-      .box{
-        @extend .flexColumn;
-        margin-right : 10px;
-      }
-      #left-box{
-        align-items : flex-end; 
-      }
-      #right-box{
-        align-items : flex-start;
-      }
-      .box-item{
-        margin-top  : 15px;
-      }
-      
-    }
-
-    #bar{
-      margin-top: 40px;
-      .loader{
-        margin-top:0px;
-        border: 5px solid #f3f3f3; /* Light grey */
-        border-top: 5px solid #1f72a8; /* Blue */
-      }
-    }
-  
-    
-
-  }
-  
-
-
+	}
+	 
 }
 
-#progress {
-  width: 500px;   
-  border: 1px solid black;
-  position: relative;
-  padding: 3px;
- }
- 
- #percent {
-  position: absolute;   
-  left: 50%;
- }
- 
- #progress-bar {
-  height: 20px;
-  background-color: green;
-  width:0%
- }
+

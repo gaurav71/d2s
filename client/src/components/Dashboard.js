@@ -14,7 +14,7 @@ class Dashboard extends Component{
             authenticated : false,
             loading : true,
             downloadStatus : "idle",        // [idle || loading || loaded || downloading || uploading || finished || error] // 
-            file : {name:null, size:null, recieved:null, percent:null}
+            file : {name:"", size:null, recieved:null, percent:null}
         }
         this.handleChange   = this.handleChange.bind(this);
         this.handleSubmit   = this.handleSubmit.bind(this);
@@ -23,7 +23,7 @@ class Dashboard extends Component{
     }
 
 
-
+    /*
     async componentDidMount(){
         try{
             await axios.get("/api/dashboard", {withCredentials:true});
@@ -33,7 +33,7 @@ class Dashboard extends Component{
             this.setState({authenticated : false, loading:false});
         }
     }
-
+*/
 
 
     handleChange(event){
@@ -109,6 +109,10 @@ class Dashboard extends Component{
 
     render(){
 
+        if(this.state.authenticated === false){
+            return <Redirect to ="/"/>    
+        }
+
         if(this.state.loading){
             return( 
             <div style={{
@@ -119,10 +123,6 @@ class Dashboard extends Component{
                 justifyContent:"center"}}>
                 {getLoader()}
             </div>)
-        }
-
-        if(this.state.authenticated === false){
-            return <Redirect to ="/"/>    
         }
 
         return(
@@ -147,10 +147,8 @@ class Dashboard extends Component{
 const InputUrl = (props) => {
     return (
         <div id="url-box" className="dash-child">
-            <div className="url-box-item"><input type="text" onChange={props.handleChange}/></div>
-            <div className="url-box-item" style={{display:"flex", justifyContent:"center "}}>
-                <button id="submit-url" className="dash-button" onClick={props.handleSubmit}>Download</button>
-            </div>
+            <input type="text" onChange={props.handleChange}/>
+            <button id="submit-url" onClick={props.handleSubmit}>Download</button>
         </div>
     )
 }
@@ -187,7 +185,7 @@ const Download = (props) => {
             <FileDetails 
                 file = {props.file}
                 downloadStatus = {props.downloadStatus}/>
-            <div id = "bar">
+            <div className  = "dash-child">
                 {child}
             </div>
         </div>
@@ -266,7 +264,7 @@ const getLoader = () => {
 
 
 function humanFileSize(bytes) {
-    
+    if(!bytes || bytes==null) return ""; 
     var thresh = 1000;
     if(Math.abs(bytes) < thresh) {
         return bytes + ' B';

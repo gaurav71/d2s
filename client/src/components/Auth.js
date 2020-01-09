@@ -108,7 +108,6 @@ class Auth extends Component{
                     handleLogin     = {this.handleLogin}
                     handleRegister  = {this.handleRegister}/>
 
-                <SocialLogin/>
             </div>
             </div>
         )
@@ -119,7 +118,7 @@ class Auth extends Component{
 const Title = (props) => {
     const display = props.loading?"block":"none"
     return (
-        <div style={{display:"flex", flexDirection:"column", alignItems:"center", marginBottom:"5px"}}>
+        <div id="title">
             <h1>{props.title}</h1>
             <div style={{display}} className="loader"></div>
             <Errors 
@@ -146,15 +145,17 @@ const Form = (props) => {
         <form id="login-box">
             <div className="input">
                 <div><label htmlFor="email">Email: </label></div>
-                <div><input type="text" name="email" style={props.emailStyle} onChange={props.handleChange} required/></div>
+                <div className="center"><input type="text" name="email" style={props.emailStyle} onChange={props.handleChange} required/></div>
             </div>
             <div className="input">
                 <div><label htmlFor="password">Password: </label></div>
-                <div><input type="password" name="password" style={props.passwordStyle} onChange={props.handleChange} required/></div>
+                <div className="center"><input type="password" name="password" style={props.passwordStyle} onChange={props.handleChange} required/></div>
             </div>
             <div id="log-reg-buttons">
                 <button type="submit" onClick={props.handleLogin}>Login</button>
-            </div>        
+                <div id="or">{"-- OR --"}</div>        
+                <SocialLogin />
+            </div>
         </form>
     )
 }
