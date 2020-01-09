@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import axios from "axios";
 import {Redirect} from "react-router-dom";
-import { GoogleLoginButton, FacebookLoginButton } from "react-social-login-buttons";
+import { GoogleLoginButton} from "react-social-login-buttons";
 
 import Navbar from "./Navbar"
 
@@ -16,7 +16,6 @@ class Auth extends Component{
             showErrors      : false,
             loading         : false
         }
-        this.handleRegister = this.handleRegister.bind(this);
         this.handleLogin    = this.handleLogin.bind(this);
         this.handleChange   = this.handleChange.bind(this);
     }
@@ -41,29 +40,6 @@ class Auth extends Component{
         })
     }
 
-
-
-    async handleRegister(event){
-        event.preventDefault();
-        this.setState({loading : true, showErrors:false});
-        const {email, password} = this.state;
-        if(email.valid===false || password.valid===false){
-            return this.setState({showErrors : true, loading:false})
-        }
-        try{
-            const res =  await axios.post("/api/auth/register", 
-            {email:email.value, password:password.value}, {withCredentials: true});
-            if(res.data.success)
-                return this.setState({authenticated:true, loading:false})
-            if(res.data.error)
-                return this.setState({showErrors:true, errors:"Email Registered already", loading:false})
-
-        }
-        catch(err){
-            return this.setState({showErrors:true, errors:"server error", loading:false})
-        }
-        
-    }
     
     
     async handleLogin(event){
@@ -178,7 +154,6 @@ const Form = (props) => {
             </div>
             <div id="log-reg-buttons">
                 <button type="submit" onClick={props.handleLogin}>Login</button>
-                <button type="submit" onClick={props.handleRegister}>Register</button>
             </div>        
         </form>
     )
@@ -188,10 +163,10 @@ const SocialLogin = (props) => {
     return (
         <div id="social-log-buttons">
             <a href="/api/auth/google">
-                <GoogleLoginButton />
-            </a>
-            <a href="#">
-                <FacebookLoginButton />
+                <GoogleLoginButton 
+                    iconSize="22px" 
+                    style={{fontSize:"16px", display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"center"}} 
+                    size="40px" align="center"/>
             </a>
         </div>
     )

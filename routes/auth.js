@@ -68,10 +68,10 @@ router.get("/google", passport.authenticate("google", {scope: ['profile']}) )
 
 
 //ROUTE "/api/auth/google/callback"
-router.get("/google/callback", passport.authenticate("google", { failureRedirect: config.reactServer }), (req,res)=>{
+router.get("/google/callback", passport.authenticate("google", { failureRedirect: "/" }), (req,res)=>{
         req.session.userId = req.user._id;
         req.session.save(err=>{})
-        res.redirect(config.reactServer+"/dashboard");
+        res.redirect("/dashboard");
 })
 
 

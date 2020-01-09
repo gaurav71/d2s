@@ -24,9 +24,10 @@ module.exports = passport.use(new GoogleStrategy({
         const db = client.db("main");
         db.collection("users").findOne({googleId : profile.id}, (err, doc) => {
             if(doc) return cb(null, doc);
-            db.collection("users").insertOne({name: profile.displayName, googleId:profile.id}, (err, doc) => {
-                return cb(null, doc.ops[0]);
-            })
+            //db.collection("users").insertOne({name: profile.displayName, googleId:profile.id}, (err, doc) => {
+            //    return cb(null, doc.ops[0]);
+            //})
+            return cb(null)
         })
     })
 }));
